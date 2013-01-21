@@ -2,17 +2,18 @@
 
 <openmrs:require privilege="Patient Dashboard - View Drug Order Section" otherwise="/login.htm" redirect="/module/pharmacymanagement/storequest.form"/>
  
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery1.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_page1.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_table1.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.dataTables1.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.simplemodal1.js" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.js" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_page.css" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_table.css" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.dataTables.js" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.simplemodal.js" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.createdit.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic1.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic1.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/calendar1.js" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic.js" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic.css" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/calendar.js" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.PrintArea.js" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/dataentrystyle.css" />
+
 <script type="text/javascript">
 	var $dm = jQuery.noConflict();
 
