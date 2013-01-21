@@ -2,16 +2,11 @@
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <openmrs:require privilege="View Drug store alert" otherwise="/login.htm" redirect="/module/pharmacymanagement/storeAlert.htm"/>
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/dataentrystyle.css" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.tabs.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.tabs.css" />
 
 <div>
 
-<div id="outer">
-<%@ include file="template/leftMenu.jsp"%>
-</div>
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
+
 <div id="middle">
 
 <script type="text/javascript">

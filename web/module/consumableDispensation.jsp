@@ -3,12 +3,6 @@
 
 <openmrs:require privilege="Manage Pharmacy" otherwise="/login.htm" redirect="/module/pharmacymanagement/consumabledispensation.htm"/>
 
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/dataentrystyle.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/jquery.js" /> 
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/jquery.validate.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/demo_page.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/demo_table.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/jquery.dataTables.js" /> 
 <script	type="text/javascript">
 	var $p = jQuery.noConflict();
 	$p(document).ready( function() {

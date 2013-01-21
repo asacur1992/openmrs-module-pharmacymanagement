@@ -1,20 +1,14 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-
 <%@ include file="/WEB-INF/template/header.jsp"%>
-<openmrs:require privilege="View Drug Store management"
-	otherwise="/login.htm" redirect="/module/pharmacymanagement/return.form" />
+
+<openmrs:require privilege="View Drug Store management" otherwise="/login.htm" redirect="/module/pharmacymanagement/return.form" />
 
 <div>
-<div id="outer"><%@ include file="template/leftMenu.jsp"%>
-</div>
-<div id="middle"><%@ include file="template/localHeader.jsp"%>
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
 
-<openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/dataentrystyle.css" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/jquery.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/jquery.validate.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/create_dynamic_field.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/validator.js" />
+<div id="middle">
+<%@ include file="template/localHeader.jsp"%>
+
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(document).ready(function() {

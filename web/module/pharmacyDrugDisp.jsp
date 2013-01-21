@@ -3,14 +3,6 @@
 
 <openmrs:require privilege="Manage Pharmacy" otherwise="/login.htm" redirect="/module/pharmacymanagement/pharmacyReport.htm"/>
 
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/demo_page.css" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/demo_table.css" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.dataTables.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/create_dynamic_field.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/dataentrystyle.css" />
-
-
 <script type="text/javascript">
 var pId=0;
 var pattId = 0;

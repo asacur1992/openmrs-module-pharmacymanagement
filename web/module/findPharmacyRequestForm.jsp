@@ -1,25 +1,15 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-
 <%@ include file="/WEB-INF/template/header.jsp"%>
+
 <openmrs:require privilege="Manage Pharmacy" otherwise="/login.htm" redirect="/module/pharmacymanagement/pharmacyorder.list"/>
 
 <div>
 
-<div id="outer">
-<%@ include file="template/leftMenu.jsp"%>
-</div>
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
+
 <div id="middle">
 
 <%@ include file="template/dispensingLocalHeader.jsp"%>
-
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/demo_page.css" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/demo_table.css" />
-<openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/jquery.dataTables.js" />
-<openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/dataentrystyle.css" />
-<openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
 
 <script type="text/javascript">
 var $ = jQuery.noConflict();

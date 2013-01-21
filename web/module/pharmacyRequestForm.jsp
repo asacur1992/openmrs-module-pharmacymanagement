@@ -1,24 +1,17 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
-<openmrs:require privilege="View Pharmacy management" otherwise="/login.htm"
-	redirect="/module/pharmacymanagement/pharmacyrequest.form" />
+<openmrs:require privilege="View Pharmacy management" otherwise="/login.htm" redirect="/module/pharmacymanagement/pharmacyrequest.form" />
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <div>
 
-<div id="outer"><%@ include file="template/leftMenu.jsp"%>
+<div id="outer">
+	<%@ include file="template/leftMenu.jsp"%>
 </div>
-<div id="middle"><%@ include
-	file="template/dispensingLocalHeader.jsp"%> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/jquery.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/jquery.validate.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/create_dynamic_field.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/validator.js" /> <openmrs:htmlInclude
-	file="/moduleResources/pharmacymanagement/dataentrystyle.css" /> <openmrs:htmlInclude
-	file="/scripts/calendar/calendar.js" /> 
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.tabs.js" />
-<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/jquery.tabs.css" />
-<script type="text/javascript">
 
+<div id="middle">
+<%@ include file="template/dispensingLocalHeader.jsp"%>
+
+<script type="text/javascript">
 var $dsm = jQuery.noConflict();
 $dsm(function() {
 	$dsm('#productCategory').tabs();
