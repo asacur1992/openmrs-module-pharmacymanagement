@@ -4,12 +4,10 @@
 
 <div>
 
-<div id="outer">
-<%@ include file="template/leftMenu.jsp"%>
-</div>
-<div id="middle">
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
 
-<%@ include file="template/localHeader.jsp"%>
+<div id="middle"><%@ include file="template/localHeader.jsp"%>
+
 <script type="text/javascript">
 var $ = jQuery.noConflict();
 $(document).ready( function() {

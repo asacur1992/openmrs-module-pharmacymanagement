@@ -3,6 +3,13 @@
 
 <openmrs:require privilege="Manage Pharmacy" otherwise="/login.htm" redirect="/module/pharmacymanagement/consumabledispensation.htm"/>
 
+
+<div>
+
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
+
+<div id="middle"><%@ include file="template/dispensingLocalHeader.jsp"%>
+
 <script	type="text/javascript">
 	var $p = jQuery.noConflict();
 	$p(document).ready( function() {
@@ -48,14 +55,6 @@
 		}); **/
 	});
 </script>
-<div>
-
-<div id="outer">
-<%@ include file="template/leftMenu.jsp"%>
-</div>
-
-<div id="middle">
-	<%@ include file="template/dispensingLocalHeader.jsp"%>
 	
 	<b class="boxHeader">Bon de Sortie</b>
 	<div class="box">

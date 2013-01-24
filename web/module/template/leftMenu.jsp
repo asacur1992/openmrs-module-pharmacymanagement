@@ -1,4 +1,4 @@
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/basic.css" />
+<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/basic.css" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/demo_page.css" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/demo_table.css" />
 <openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/dataentrystyle.css" />

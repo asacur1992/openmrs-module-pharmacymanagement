@@ -1,14 +1,13 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 
 <%@ include file="/WEB-INF/template/header.jsp"%>
-<openmrs:require privilege="View Pharmacies" otherwise="/login.htm"
-	redirect="/module/pharmacymanagement/pharmacy.list" />
+<openmrs:require privilege="View Pharmacies" otherwise="/login.htm" redirect="/module/pharmacymanagement/pharmacy.list" />
 
 
 <div>
 
-<div id="outer"><%@ include file="template/leftMenu.jsp"%>
-</div>
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
+
 <div id="middle"><%@ include file="template/adminLocalHeader.jsp"%>
 
 <script type="text/javascript">
@@ -38,10 +37,8 @@
 				<td><a
 					href="${pageContext.request.contextPath}/module/pharmacymanagement/pharmacy.form?pharmacyId=${pharmacy.pharmacyId}">${pharmacy.name}</a></td>
 				<td>${pharmacy.locationId.name}</td>
-				<td><a
-					href="${pageContext.request.contextPath}/module/pharmacymanagement/pharmacy.list?pharmacyId=${pharmacy.pharmacyId}"><img
-					src="${pageContext.request.contextPath}/images/delete.gif"
-					style="cursor: pointer;" /></a></td>
+				<td><ahref="${pageContext.request.contextPath}/module/pharmacymanagement/pharmacy.list?pharmacyId=${pharmacy.pharmacyId}">
+					<img src="${pageContext.request.contextPath}/images/delete.gif" style="cursor: pointer;" /></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>

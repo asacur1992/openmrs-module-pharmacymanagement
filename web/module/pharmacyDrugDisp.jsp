@@ -3,6 +3,13 @@
 
 <openmrs:require privilege="Manage Pharmacy" otherwise="/login.htm" redirect="/module/pharmacymanagement/pharmacyReport.htm"/>
 
+
+<div>
+
+<div id="outer"><%@ include file="template/leftMenu.jsp"%></div>
+
+<div id="middle"><%@ include file="template/dispensingLocalHeader.jsp"%>
+
 <script type="text/javascript">
 var pId=0;
 var pattId = 0;
@@ -106,14 +113,7 @@ $dsm(document).ready(function() {
 });
 
 </script>
-<div>
 
-<div id="outer">
-<%@ include file="template/leftMenu.jsp"%>
-</div>
-<div id="middle">
-
-<%@ include file="template/dispensingLocalHeader.jsp"%>
 
 <br />
 <br />

@@ -227,10 +227,6 @@ function CompareDates(dateFormat)
     var nowMonth = month.toString().length == 1 ? '0' + month : month;
     var nowYear = now.getYear()+1900;
     
-    //var str2 = nowDay + "/" + nowMonth + "/" + nowYear;
-    
-    //alert("str1: -" + str1 + "- str2: -" + str2 + "-");
-    
     
 	if(dateFormat=='dd/mm/yyyy' || dateFormat=='jj/mm/aaaa') { 
 		str2 = nowDay + "/" + nowMonth + "/" + nowYear;
