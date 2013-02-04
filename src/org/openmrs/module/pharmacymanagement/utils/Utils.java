@@ -158,11 +158,11 @@ public class Utils {
 	 */
 	public static boolean emptyDays(String date, String drugId, String conceptId, String locationId) {		
 		boolean isTrue = false;
-		int soldeOnDate = 0;
-		soldeOnDate = Context.getService(DrugOrderService.class).getSoldeByFromDrugLocation(date, drugId, conceptId, locationId);
-		if (soldeOnDate == 0) {
+		int soldeOnDate = Context.getService(DrugOrderService.class).getSoldeByFromDrugLocation(date, drugId, conceptId, locationId);
+		
+		if (soldeOnDate == 0)
 			isTrue = true;
-		}
+		
 		return isTrue;
 	}
 
@@ -185,19 +185,19 @@ public class Utils {
 	
 	public static Integer stockOut(DrugProduct dp,
 			int year, int month, String locationId) {
+		String date = null;
+		String conceptIdStr = dp.getConceptId() != null ? dp.getConceptId().getConceptId() + "" : null;
+		String drugIdStr = dp.getDrugId() != null ? dp.getDrugId().getDrugId() + "" : null;
 		int month1 = month - 1;
 		int daysOfMonth = getLastDayOfMonth(year, month1);
 		int count = 0;
+		System.out.println("********************* Start For loop: " + new Date());
 		for (int i = 1; i <= daysOfMonth; i++) {
-			String date = year + "" + month1 + "" + i;
-			if(dp.getDrugId() != null) {
-				if (emptyDays(date, dp.getDrugId().getDrugId()+"", null, locationId))
-					count++;
-			} else {
-				if (emptyDays(date, null, dp.getConceptId().getConceptId()+"", locationId))
-					count++;
-			}
+			if (emptyDays(year + "-" + month1 + "-" + i, drugIdStr, conceptIdStr, locationId))
+				count++;
 		}
+		System.out.println("********************* End For loop: " + new Date());
+		
 		return count;
 	}
 	
