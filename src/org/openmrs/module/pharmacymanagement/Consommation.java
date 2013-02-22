@@ -5,6 +5,10 @@ package org.openmrs.module.pharmacymanagement;
 
 import java.util.Date;
 
+import org.openmrs.Concept;
+import org.openmrs.Drug;
+import org.openmrs.Location;
+
 
 /**
  *@author Dusabe Eric
@@ -12,9 +16,13 @@ import java.util.Date;
  */
 public class Consommation {
 	
+	protected static Consommation instance;
+	
 	private String drugName;
 	private String drugId;
+	private Drug drug;
 	private String conceptId;
+	private Concept concept;
 	private String forme;
 	private String conditUnitaire;
 	private int qntPremJour;
@@ -22,6 +30,7 @@ public class Consommation {
 	private Object qntConsomMens;
 	private int qntRestMens;
 	private int locationId;
+	private Location location;
 	private Date expirationDate;
 	private DrugProduct drugProduct;
 	private int stockOut;
@@ -30,6 +39,56 @@ public class Consommation {
 	private int qntyToOrder;
 	private int returnedProduct;
 	private int adjustedProduct;
+	
+	
+	protected Consommation(int qntPremJour, Object qntRecuMens, Object qntConsomMens, int qntRestMens, Location location, DrugProduct drugProduct, int stockOut, int adjustMonthlyConsumption, int maxQnty, int qntyToOrder, int returnedProduct) {
+		this.qntPremJour = qntPremJour;
+		this.qntRecuMens = qntRecuMens;
+		this.qntConsomMens = qntConsomMens;
+		this.qntRestMens = qntRestMens;
+		this.location = location;
+		this.drugProduct = drugProduct;
+		this.stockOut = stockOut;
+		this.adjustMonthlyConsumption = adjustMonthlyConsumption;
+		this.maxQnty = maxQnty;
+		this.qntyToOrder = qntyToOrder;
+		this.returnedProduct = returnedProduct;
+	}
+	
+	/**
+	 * Gets the singleton instance
+	 * @return
+	 */
+	public static Consommation getInstance() {
+		return instance;
+	}
+	
+	/**
+	 * Creates the singleton instance
+	 */
+	public static Consommation createInstance(int qntPremJour, Object qntRecuMens, Object qntConsomMens, int qntRestMens, Location location, DrugProduct drugProduct, int stockOut, int adjustMonthlyConsumption, int maxQnty, int qntyToOrder, int returnedProduct) {
+		instance = new Consommation(qntPremJour, qntRecuMens, qntConsomMens, qntRestMens, location, drugProduct, stockOut, adjustMonthlyConsumption, maxQnty, qntyToOrder, returnedProduct);
+		return instance;
+	}
+	
+	/**
+	 * Clears the singleton instance
+	 */
+	public static void clearInstance() {
+		instance = null;
+	}
+	
+	public Drug getDrug() {
+		return drug;
+	}
+	
+	public Concept getConcept() {
+		return concept;
+	}
+	
+	public Location getLocation() {
+		return location;
+	}
 	
 	public DrugProduct getDrugProduct() {
 		return drugProduct;

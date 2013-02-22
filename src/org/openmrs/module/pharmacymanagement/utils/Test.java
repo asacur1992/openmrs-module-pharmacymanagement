@@ -1,6 +1,9 @@
 package org.openmrs.module.pharmacymanagement.utils;
 
 import java.text.ParseException;
+import java.util.Date;
+
+import org.openmrs.module.pharmacymanagement.utils.Utils;
 
 public class Test {
 	
@@ -13,18 +16,11 @@ public class Test {
 	 */
 	public static void main(String[] args) throws ParseException {
 		
-		String cn = "19/09/2012,;1,Urine,guess,19/09/2012,;2,Hemoglobin,guess,19/09/2012,;20/09/2012,;2,CD4,guess,20/09/2012,;";
-		String[] arr = cn.split(";");
-		for(String str : arr) {
-			String[] arr1 = str.split(",");
-			for(int i = 0; i < arr1.length; i++) {
-				System.out.print(arr1[i]);
-				if(arr1.length != (i+1)) {
-					System.out.print(", ");
-				}				
-			}
-			System.out.println("");
-		}
+//		System.out.println("********************* Start For loop: " + new Date());
+//		for (int i = 1; i <= daysOfMonth; i++) {
+//			if (emptyDays(year + "" + month1 + "" + i, drugIdStr, conceptIdStr, locationId))
+//				count++;
+//		}
 	}
 
 }

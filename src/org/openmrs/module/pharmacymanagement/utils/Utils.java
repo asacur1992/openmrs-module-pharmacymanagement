@@ -185,11 +185,10 @@ public class Utils {
 	
 	public static Integer stockOut(DrugProduct dp,
 			int year, int month, String locationId) {
-		int month1 = month - 1;
-		int daysOfMonth = getLastDayOfMonth(year, month1);
+		int daysOfMonth = getLastDayOfMonth(year, month);
 		int count = 0;
 		for (int i = 1; i <= daysOfMonth; i++) {
-			String date = year + "" + month1 + "" + i;
+			String date = year + "-" + month + "-" + i;
 			if(dp.getDrugId() != null) {
 				if (emptyDays(date, dp.getDrugId().getDrugId()+"", null, locationId))
 					count++;
