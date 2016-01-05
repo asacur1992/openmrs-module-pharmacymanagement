@@ -19,6 +19,7 @@ import org.openmrs.Patient;
 import org.openmrs.api.ConceptService;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohtracportal.service.MohTracPortalService;
 import org.openmrs.module.pharmacymanagement.DrugLotDate;
 import org.openmrs.module.pharmacymanagement.DrugProduct;
 import org.openmrs.module.pharmacymanagement.Pharmacy;
@@ -75,14 +76,14 @@ public class PatientDrugOrders extends ParameterizableViewController {
 		if (patient != null && request.getParameter("pharmacyId") != null
 				&& !request.getParameter("pharmacyId").equals("")) {
 
-			drugOrders = Context.getOrderService().getDrugOrdersByPatient(
+			drugOrders = Context.getService(MohTracPortalService.class).getDrugOrdersByPatient(
 					patient);
 
 			pharmacy = service.getPharmacyById(Integer.valueOf(request
 					.getParameter("pharmacyId")));
 			List<Integer> drugIdList = new ArrayList<Integer>();
 			for (DrugOrder dor : drugOrders) {
-				if (dor.getDiscontinued() == false) {
+				if (dor.isActive()) {
 					drugOrderList.add(dor);
 				}
 			}

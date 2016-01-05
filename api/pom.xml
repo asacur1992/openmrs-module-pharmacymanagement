@@ -6,7 +6,6 @@
 		<artifactId>pharmacymanagement</artifactId>
 		<version>1.2.7-SNAPSHOT</version>
 	</parent>
-	<groupId>org.openmrs.module</groupId>
 	<artifactId>pharmacymanagement-api</artifactId>
 	<packaging>jar</packaging>
 	<name>Pharmacy Management and Dispensing Module API</name>
@@ -20,7 +19,11 @@
 			<artifactId>library-name</artifactId>
 		</dependency>
 		-->
-		
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohappointment-api</artifactId>
+			<version>0.1.9</version>
+		</dependency>
 		<dependency>
 			<groupId>org.openmrs.api</groupId>
 			<artifactId>openmrs-api</artifactId>
@@ -29,11 +32,6 @@
 		<dependency>
 			<groupId>org.openmrs.web</groupId>
 			<artifactId>openmrs-web</artifactId>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openmrs.test</groupId>
-			<artifactId>openmrs-test</artifactId>
 			<type>jar</type>
 		</dependency>
 	</dependencies>

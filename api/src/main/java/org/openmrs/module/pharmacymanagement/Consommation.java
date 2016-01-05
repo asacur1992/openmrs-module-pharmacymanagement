@@ -40,7 +40,6 @@ public class Consommation {
 	private int returnedProduct;
 	private int adjustedProduct;
 	
-	
 	protected Consommation(int qntPremJour, Object qntRecuMens, Object qntConsomMens, int qntRestMens, Location location, DrugProduct drugProduct, int stockOut, int adjustMonthlyConsumption, int maxQnty, int qntyToOrder, int returnedProduct) {
 		this.qntPremJour = qntPremJour;
 		this.qntRecuMens = qntRecuMens;
@@ -55,6 +54,10 @@ public class Consommation {
 		this.returnedProduct = returnedProduct;
 	}
 	
+	public Consommation() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Gets the singleton instance
 	 * @return

@@ -3,7 +3,6 @@ package org.openmrs.module.pharmacymanagement.phcymgt.web.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,7 @@ import org.openmrs.Drug;
 import org.openmrs.DrugOrder;
 import org.openmrs.Location;
 import org.openmrs.Order;
+import org.openmrs.Order.Action;
 import org.openmrs.OrderType;
 import org.openmrs.Patient;
 import org.openmrs.api.ConceptService;
@@ -21,13 +21,11 @@ import org.openmrs.api.LocationService;
 import org.openmrs.api.OrderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.mohappointment.model.Appointment;
-import org.openmrs.module.mohappointment.model.Services;
-import org.openmrs.module.mohappointment.service.IAppointmentService;
 import org.openmrs.module.mohappointment.utils.AppointmentUtil;
+import org.openmrs.module.mohtracportal.service.MohTracPortalService;
 import org.openmrs.module.pharmacymanagement.PharmacyConstants;
 import org.openmrs.module.pharmacymanagement.utils.Utils;
 import org.openmrs.util.OpenmrsConstants;
-import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.web.WebConstants;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -89,7 +87,7 @@ public class DrugOrderPrescriptionController extends AbstractController {
 				if (request.getParameter("quantity") != null
 						&& !request.getParameter("quantity").equals("")) {
 					qtyStr = request.getParameter("quantity");
-					drugOrder.setQuantity(Integer.valueOf(qtyStr));
+					drugOrder.setQuantity(Double.valueOf(qtyStr));
 				}
 
 				drugOrder.setCreator(Context.getAuthenticatedUser());
@@ -99,17 +97,18 @@ public class DrugOrderPrescriptionController extends AbstractController {
 				drugOrder.setDateCreated(new Date());
 				drugOrder.setPatient(patient);
 				drugOrder.setDrug(drug);
-				drugOrder.setDiscontinued(false);
+				drugOrder.setAction(Action.RENEW);
+				drugOrder.setDateActivated(new Date());
 
 				if (request.getParameter("dose") != null
 						&& !request.getParameter("dose").equals(""))
 					drugOrder.setDose(Double.valueOf(request
 							.getParameter("dose")));
-				drugOrder.setFrequency(request.getParameter("frequency"));
-				drugOrder.setUnits(request.getParameter("units"));
+				drugOrder.setFrequency(Context.getService(MohTracPortalService.class).persistAndOrFetchOrderFrequency(request.getParameter("frequency"), null));
+				drugOrder.setDosingInstructions(request.getParameter("units"));
 				if (request.getParameter("quantity") != null
 						&& !request.getParameter("quantity").equals(""))
-					drugOrder.setQuantity(Integer.valueOf(request
+					drugOrder.setQuantity(Double.valueOf(request
 							.getParameter("quantity")));
 				if (!startDateStr.equals("") && startDateStr != null) {
 					Date startDate = null;
@@ -119,9 +118,9 @@ public class DrugOrderPrescriptionController extends AbstractController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					drugOrder.setStartDate(startDate);
+					drugOrder.setDateActivated(startDate);
 
-					orderService.saveOrder(drugOrder);
+					orderService.saveOrder(drugOrder, null);
 
 					/**
 					 * _____________Setting Appointment as Attended here:
@@ -163,9 +162,8 @@ public class DrugOrderPrescriptionController extends AbstractController {
 				&& !request.getParameter("editcreate").equals("")
 				&& patient != null) {
 			if (request.getParameter("editcreate").equals("edit")) {
-				DrugOrder drugOrder = orderService.getOrder(
-						Integer.valueOf(request.getParameter("orderId")),
-						DrugOrder.class);
+				DrugOrder drugOrder = (DrugOrder) orderService.getOrder(
+						Integer.valueOf(request.getParameter("orderId")));
 				// Order order = orderService.getOrder(Integer.valueOf(request
 				// .getParameter("orderId")));
 
@@ -183,12 +181,12 @@ public class DrugOrderPrescriptionController extends AbstractController {
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
-					drugOrder.setStartDate(startDate);
+					drugOrder.setDateActivated(startDate);
 				}
 				if (request.getParameter("quantity") != null
 						&& !request.getParameter("quantity").equals("")) {
 					qtyStr = request.getParameter("quantity");
-					drugOrder.setQuantity(Integer.valueOf(qtyStr));
+					drugOrder.setQuantity(Double.valueOf(qtyStr));
 				}
 
 				drugOrder.setConcept(drug.getConcept());
@@ -202,15 +200,15 @@ public class DrugOrderPrescriptionController extends AbstractController {
 					drugOrder.setDose(Double.valueOf(request
 							.getParameter("dose")));
 
-				drugOrder.setFrequency(request.getParameter("frequency"));
-				drugOrder.setUnits(request.getParameter("units"));
+				drugOrder.setFrequency(Context.getService(MohTracPortalService.class).persistAndOrFetchOrderFrequency(request.getParameter("frequency"), null));
+				drugOrder.setDosingInstructions(request.getParameter("units"));
 
 				if (request.getParameter("quantity") != null
 						&& !request.getParameter("quantity").equals(""))
-					drugOrder.setQuantity(Integer.valueOf(request
+					drugOrder.setQuantity(Double.valueOf(request
 							.getParameter("quantity")));
 
-				orderService.saveOrder(drugOrder);
+				orderService.saveOrder(drugOrder, null);
 				mav.addObject("msg", "An order has been updated successfully!");
 			}
 		}
@@ -223,7 +221,7 @@ public class DrugOrderPrescriptionController extends AbstractController {
 			order.setVoided(true);
 			order.setVoidedBy(Context.getAuthenticatedUser());
 			order.setVoidReason(request.getParameter("deleteReason"));
-			orderService.saveOrder(order);
+			orderService.saveOrder(order, null);
 			mav.addObject("msg", "An order has been deleted successfully!");
 
 		}
@@ -243,12 +241,8 @@ public class DrugOrderPrescriptionController extends AbstractController {
 					e.printStackTrace();
 				}
 
-				order.setDiscontinuedReason(concept);
-				order.setDiscontinuedDate(date);
-				order.setDiscontinued(true);
-				order.setDiscontinuedBy(Context.getAuthenticatedUser());
-
-				orderService.saveOrder(order);
+				orderService.discontinueOrder(order, concept, date, order.getOrderer(), order.getEncounter());
+				orderService.saveOrder(order, null);
 				mav.addObject("msg", "An order has been stopped successfully!");
 			}
 		}

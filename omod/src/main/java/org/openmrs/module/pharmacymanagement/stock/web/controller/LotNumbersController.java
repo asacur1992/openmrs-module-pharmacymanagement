@@ -52,8 +52,9 @@ public class LotNumbersController implements Controller {
 			
 			av = new AjaxView();
 			
+			av.render(dpLot, request, response);
 			dpLot.put(1, obj);
 		}			
-		return new ModelAndView(av,dpLot);
+		return new ModelAndView(av);
 	}
 }

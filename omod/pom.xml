@@ -6,7 +6,6 @@
 		<artifactId>pharmacymanagement</artifactId>
 		<version>1.2.7-SNAPSHOT</version>
 	</parent>
-	<groupId>org.openmrs.module</groupId>
 	<artifactId>pharmacymanagement-omod</artifactId>
 	<packaging>jar</packaging>
 	<name>Pharmacy Management and Dispensing Module OMOD</name>
@@ -18,7 +17,11 @@
 			<artifactId>pharmacymanagement-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohtracportal-api</artifactId>
+			<version>0.2.5</version>
+		</dependency>
 		<dependency>
 			<groupId>org.openmrs.api</groupId>
 			<artifactId>openmrs-api</artifactId>
@@ -27,11 +30,6 @@
 		<dependency>
 			<groupId>org.openmrs.web</groupId>
 			<artifactId>openmrs-web</artifactId>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.openmrs.test</groupId>
-			<artifactId>openmrs-test</artifactId>
 			<type>jar</type>
 		</dependency>
 	</dependencies>
@@ -94,13 +92,6 @@
 				<artifactId>maven-openmrs-plugin</artifactId>
 				<extensions>true</extensions>
 				<executions>
-					<execution>
-						<id>init</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>initialize-module</goal>
-						</goals>
-					</execution>
 					<execution>
 						<id>pack</id>
 						<phase>package</phase>
