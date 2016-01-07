@@ -7,13 +7,12 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.Location;
 import org.openmrs.Patient;
 import org.openmrs.User;
-import org.openmrs.module.pharmacymanagement.ProductReturnStore;
+import org.openmrs.api.db.hibernate.DbSession;
+import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.pharmacymanagement.CmdDrug;
 import org.openmrs.module.pharmacymanagement.ConsumableDispense;
 import org.openmrs.module.pharmacymanagement.DrugDetails;
@@ -24,16 +23,16 @@ import org.openmrs.module.pharmacymanagement.DrugStore;
 import org.openmrs.module.pharmacymanagement.Pharmacy;
 import org.openmrs.module.pharmacymanagement.PharmacyConstants;
 import org.openmrs.module.pharmacymanagement.PharmacyInventory;
+import org.openmrs.module.pharmacymanagement.ProductReturnStore;
 import org.openmrs.module.pharmacymanagement.db.DrugOrderDAO;
-import org.springframework.orm.hibernate3.SessionFactoryUtils;
 
 public class DrugOrderDAOImpl implements DrugOrderDAO {
-	private SessionFactory sessionFactory;
+	private DbSessionFactory sessionFactory;
 
 	/**
 	 * @return the sessionFactory
 	 */
-	public SessionFactory getSessionFactory() {
+	public DbSessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
@@ -41,13 +40,12 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	 * @param sessionFactory
 	 *            the sessionFactory to set
 	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	public void setSessionFactory(DbSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	public void cancelProduct(DrugStore product) {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		session.delete(product);
 	}
 
@@ -67,23 +65,21 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	}
 
 	public CmdDrug getCmdDrugById(int cmddrugId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		CmdDrug cmdDrug = (CmdDrug) session.get(CmdDrug.class, cmddrugId);
 		return cmdDrug;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Collection<CmdDrug> getOrders() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<CmdDrug> orders = session.createCriteria(CmdDrug.class)
 				.list();
 		return orders;
 	}
 
 	public void updateStore(DrugProduct product) {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		session.update(product);
 	}
 
@@ -100,7 +96,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DrugProduct> getDrugProductByCmdDrugId(CmdDrug cmddrug) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(DrugProduct.class)
 				.createCriteria("cmddrugId").add(
 						Restrictions.idEq(cmddrug.getCmddrugId()));
@@ -110,7 +106,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public DrugProduct getDrugProductById(int drugproductId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		DrugProduct drugProduct = (DrugProduct) session.get(DrugProduct.class,
 				drugproductId);
 		return drugProduct;
@@ -119,8 +115,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DrugProduct> getAllProducts() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<DrugProduct> products = session.createCriteria(
 				DrugProduct.class).list();
 		return products;
@@ -134,7 +129,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<CmdDrug> findDrugOrdersByMonth(int mois) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<CmdDrug> orders = session.createCriteria(CmdDrug.class).add(
 				Restrictions.eq("monthPeriod", mois)).list();
 		return orders;
@@ -173,7 +168,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(";");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		Collection<CmdDrug> orders = session.createSQLQuery(sb.toString())
 				.addEntity("cd", CmdDrug.class).list();
 
@@ -182,13 +177,13 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public void saveInventory(DrugProductInventory drugproductInventory) {
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(drugproductInventory);
 	}
 
 	@Override
 	public DrugProductInventory getDrugProductInventoryById(int dpiId) {
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		DrugProductInventory dpi = (DrugProductInventory) session.get(
 				DrugProductInventory.class, dpiId);
 		return dpi;
@@ -197,8 +192,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DrugProductInventory> getAllDrugProductInventory() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		List<DrugProductInventory> dpi = session.createCriteria(
 				DrugProductInventory.class).list();
 		return dpi;
@@ -248,7 +242,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -292,7 +286,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ORDER BY dpi.inventory_id;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		Collection<DrugProductInventory> drupi = session.createSQLQuery(
 				sb.toString()).addEntity("dpi", DrugProductInventory.class)
 				.list();
@@ -315,7 +309,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 		sb.append(" and d.drug_id = '" + drugId + "' ");
 		sb.append(";");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		List<Object[]> calculations = session.createSQLQuery(sb.toString())
 				.list();
 
@@ -330,8 +324,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Pharmacy> getAllPharmacies() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<Pharmacy> pharmacies = session
 				.createCriteria(Pharmacy.class).list();
 		return pharmacies;
@@ -339,7 +332,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public Pharmacy getPharmacyById(int pharmacyId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Pharmacy pharmacy = (Pharmacy) session.get(Pharmacy.class, pharmacyId);
 		return pharmacy;
 	}
@@ -366,8 +359,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DrugDetails> getAllDrugDetails() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<DrugDetails> drugDetails = session.createCriteria(
 				DrugDetails.class).list();
 		return drugDetails;
@@ -375,7 +367,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public DrugDetails getDrugDetailsById(int drugDetailId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		DrugDetails drugDetail = (DrugDetails) session.get(DrugDetails.class,
 				drugDetailId);
 		return drugDetail;
@@ -389,8 +381,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<DrugOrderPrescription> getAllDrugOrderPrescription() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		Collection<DrugOrderPrescription> drugOrderPrescription = session
 				.createCriteria(DrugOrderPrescription.class).list();
 		return drugOrderPrescription;
@@ -399,7 +390,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@Override
 	public DrugOrderPrescription getDrugOrderPrescriptionById(
 			int drugOrderPrescriptionId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		DrugOrderPrescription drugOrderPrescription = (DrugOrderPrescription) session
 				.get(DrugOrderPrescription.class, drugOrderPrescriptionId);
 		return drugOrderPrescription;
@@ -431,7 +422,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(";");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		List<Object[]> statistics = session.createSQLQuery(sb.toString())
 				.list();
 
@@ -471,7 +462,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		List<Object> dpi = session.createSQLQuery(sb.toString()).list();
 
@@ -517,7 +508,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 		if (locationId != null && !locationId.equals(""))
 			sb.append(" AND cd.location_id = '" + locationId + "' ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Collection<DrugProduct> dpList = session.createSQLQuery(sb.toString())
 				.addEntity("dp", DrugProduct.class).list();
@@ -535,7 +526,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 				+ PharmacyConstants.DRUG_PRODUCT
 				+ " dp on dop.drugproduct_id = dp.drugproduct_id WHERE o.concept_id = '"
 				+ PharmacyConstants.RETURN_VISIT_DATE + "';";
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		List<Integer> record = session.createSQLQuery(queryStr).list();
 		for (Integer obj : record) {
 			drugIds.add(obj);
@@ -549,7 +540,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 		String queryStr = "SELECT dp.* FROM "
 				+ PharmacyConstants.DRUG_PRODUCT
 				+ " dp WHERE dp.expiry_date <= date_add(curdate(), interval 2 month) AND dp.expiry_date >= date_add(curdate(), interval 0 day) GROUP BY dp.lot_no;";
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		List<DrugProduct> dpList = session.createSQLQuery(queryStr).addEntity(
 				"dp", DrugProduct.class).list();
 
@@ -587,7 +578,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ORDER BY dpi.inventory_id DESC LIMIT 1 ;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -630,7 +621,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 					+ "' OR p.location_id = '" + locationId
 					+ "' ) ORDER BY dpi.inventory_id DESC LIMIT 1 ; ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -675,7 +666,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 			sb.append(" AND (cd.location_id = '" + locationId
 					+ "' OR p.location_id = '" + locationId + "') ; ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -720,7 +711,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ORDER BY pi.pharmacyinventory_id DESC LIMIT 1 ;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -761,7 +752,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 		sb.append(" ORDER BY pi.pharmacyinventory_id DESC LIMIT 1 ;");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -798,7 +789,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 		if (pharmacyId != null && !pharmacyId.equals(""))
 			sb.append(" AND cd.pharmacy IN ('" + pharmacyId + "') ; ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -838,7 +829,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 							+ pharmacyId
 							+ "' AND pi.dop_id IS NOT NULL ORDER BY pi.pharmacyinventory_id; ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		List<PharmacyInventory> pi = session.createSQLQuery(sb.toString())
 				.addEntity("pi", PharmacyInventory.class).list();
@@ -847,7 +838,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	}
 
 	public DrugOrderPrescription getDOPByOrderId(String orderId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(DrugOrderPrescription.class)
 				.createCriteria("orderId").add(
 						Restrictions.idEq(Integer.valueOf(orderId)));
@@ -858,7 +849,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	}
 
 	public PharmacyInventory getPIbyDOPId(String dopId) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(PharmacyInventory.class)
 				.createCriteria("dopId").add(
 						Restrictions.idEq(Integer.valueOf(dopId)));
@@ -869,7 +860,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public Location getLocationByPharmacy(Pharmacy pharmacy) {
-		Session session = getSessionFactory().getCurrentSession();
+		DbSession session = getSessionFactory().getCurrentSession();
 		Criteria criteria = session.createCriteria(Location.class)
 				.createCriteria("pharmacyId").add(
 						Restrictions.idEq(Integer.valueOf(pharmacy
@@ -920,7 +911,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 		sb
 				.append(" AND dp.lot_no IS NOT NULL AND dp.cmddrug_id IS NOT NULL GROUP BY dp.lot_no; ");
 
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 
 		Query query = session.createSQLQuery(sb.toString());
 
@@ -936,7 +927,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 
 	@Override
 	public ProductReturnStore getReturnStockById(int arsId) {
-		Session session = sessionFactory.getCurrentSession();
+		DbSession session = sessionFactory.getCurrentSession();
 		ProductReturnStore ars = (ProductReturnStore) session.get(
 				ProductReturnStore.class, arsId);
 		return ars;
@@ -969,8 +960,7 @@ public class DrugOrderDAOImpl implements DrugOrderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ConsumableDispense> getAllConsumableDipsense() {
-		Session session = (Session) SessionFactoryUtils.getSession(
-				getSessionFactory(), true);
+		DbSession session = getSessionFactory().getCurrentSession();
 		List<ConsumableDispense> consumableDispenseList = session
 				.createCriteria(ConsumableDispense.class).list();
 		return consumableDispenseList;
