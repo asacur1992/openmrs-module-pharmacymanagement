@@ -116,7 +116,8 @@
 	<!-- /Internationalization -->
 	
 	<mappingFiles>
-	${omodHbmConfig}
+		DrugProduct.hbm.xml
+		CmdDrug.hbm.xml
 	</mappingFiles>
 	
 	
