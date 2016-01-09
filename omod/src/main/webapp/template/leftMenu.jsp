@@ -1,22 +1,22 @@
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/validator.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.PrintArea.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.dataTables.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.tabs.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.treeview.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.validate.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/create_dynamic_field.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.simplemodal.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/calendar.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/validator.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.PrintArea.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.dataTables.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.tabs.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.treeview.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.validate.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/create_dynamic_field.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.simplemodal.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/basic.js" />
 
 
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/basic.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/demo_page.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/demo_table.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/dataentrystyle.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/jquery.tabs.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/css/jquery.treeview.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/basic.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/demo_page.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/demo_table.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/dataentrystyle.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/jquery.tabs.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/css/jquery.treeview.css" />
 
 <script type="text/javascript">
 var $e = jQuery.noConflict();

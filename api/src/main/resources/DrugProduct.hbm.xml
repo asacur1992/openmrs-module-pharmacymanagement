@@ -4,7 +4,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="org.openmrs.module.drugstoremgt.DrugProduct" table="drug_product">
+	<!-- This is already mapped in CmdDrug.hbm.xml -->
+	
+	<!--  class name="org.openmrs.module.drugstoremgt.DrugProduct" table="drug_product">
 		<id name="drugproductId" column="drugproduct_id">
 			<generator class="native" />
 		</id>
@@ -20,5 +22,5 @@
 		<many-to-one name="cmddrugId" class="org.openmrs.module.drugstoremgt.CmdDrug" column="cmddrug_id" />
 		<one-to-one name="drugId" class="org.openmrs.Drug" property-ref="drugId" constrained="true" />
 
-	</class>
+	</class-->
 </hibernate-mapping>

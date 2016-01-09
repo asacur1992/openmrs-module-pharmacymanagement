@@ -2,17 +2,17 @@
 
 <openmrs:require privilege="Patient Dashboard - View Drug Order Section" otherwise="/login.htm" redirect="/module/pharmacymanagement/storequest.form"/>
  
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_page.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/demo_table.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.dataTables.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.simplemodal.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.createdit.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/basic.css" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/calendar.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.PrintArea.js" />
-<openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/dataentrystyle.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/demo_page.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/demo_table.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.dataTables.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.simplemodal.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.createdit.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/basic.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/basic.css" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/calendar.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/scripts/jquery.PrintArea.js" />
+<openmrs:htmlInclude file="/moduleResources/pharmacymanagement/dataentrystyle.css" />
 
 <script type="text/javascript">
 	var $dm = jQuery.noConflict();
@@ -249,23 +249,23 @@
 <div id="dt_example">
 <div id="container">
 
-<div style="float: right"><img id="print_ordonance" src="moduleResources/@MODULE_ID@/images/print_preview.gif" style="cursor: pointer;" title="Print Preview" /></div>
+<div style="float: right"><img id="print_ordonance" src="moduleResources/pharmacymanagement/images/print_preview.gif" style="cursor: pointer;" title="Print Preview" /></div>
 <table cellpadding="0" cellspacing="0" border="0" class="display"
 	id="example_do" style="width:100%">
 	<thead>
 		<tr>
 			<th>Rendering engine</th>
-			<th><spring:message code="@MODULE_ID@.drugId" /></th>
-			<th><spring:message code="@MODULE_ID@.drug" /></th>
-			<th><spring:message code="@MODULE_ID@.dose" /></th>
-			<th><spring:message code="@MODULE_ID@.units" /></th>
-			<th><spring:message code="@MODULE_ID@.frequency" /></th>
-			<th><spring:message code="@MODULE_ID@.quantity" /></th>
-			<th><spring:message code="@MODULE_ID@.startDate" /></th>
-			<th><spring:message code="@MODULE_ID@.stopDate" /></th>
+			<th><spring:message code="pharmacymanagement.drugId" /></th>
+			<th><spring:message code="pharmacymanagement.drug" /></th>
+			<th><spring:message code="pharmacymanagement.dose" /></th>
+			<th><spring:message code="pharmacymanagement.units" /></th>
+			<th><spring:message code="pharmacymanagement.frequency" /></th>
+			<th><spring:message code="pharmacymanagement.quantity" /></th>
+			<th><spring:message code="pharmacymanagement.startDate" /></th>
+			<th><spring:message code="pharmacymanagement.stopDate" /></th>
 			<th><spring:message code="Stopped Reason" /></th>
-			<th><spring:message code="@MODULE_ID@.edit" /></th>
-			<th><spring:message code="@MODULE_ID@.stop" /></th>
+			<th><spring:message code="pharmacymanagement.edit" /></th>
+			<th><spring:message code="pharmacymanagement.stop" /></th>
 			<th><spring:message code="Delete" /></th>
 		</tr>
 	</thead>
@@ -315,7 +315,7 @@
 </div>
 
 <div id="edit-dialog-content">
-<form method="post" action="module/@MODULE_ID@/dopc.form?patientId=${model.patientId}">
+<form method="post" action="module/pharmacymanagement/dopc.form?patientId=${model.patientId}">
 <input type="hidden" name="orderId" id="editing" /> <input
 	type="hidden" name="editcreate" id="editingcreating" />
 <table>
@@ -385,7 +385,7 @@
 	</tr>
 	
 	<tr>
-		<td valign="top"><spring:message code="@MODULE_ID@.instructions" /></td>
+		<td valign="top"><spring:message code="pharmacymanagement.instructions" /></td>
 		<td><textarea name="instructions" cols="50" rows="4"
 			id="dinstructions"></textarea></td>
 	</tr>
@@ -399,7 +399,7 @@
 </div>
 
 <div id="stop-modal-content">
-<form method="post" action="module/@MODULE_ID@/dopc.form?patientId=${model.patientId}">
+<form method="post" action="module/pharmacymanagement/dopc.form?patientId=${model.patientId}">
 <input type="hidden" name="orderId" id="stopping" /> <input
 	type="hidden" name="stopping" id="stop" />
 <table>
@@ -501,7 +501,7 @@
 
 <!-- delete order modal -->
 <div id="delete-modal-content">
-<form method="post" action="module/@MODULE_ID@/dopc.form?patientId=${model.patientId}&delete=on">
+<form method="post" action="module/pharmacymanagement/dopc.form?patientId=${model.patientId}&delete=on">
 <input type="hidden" name="orderToDel" id="orderToDelId" />
 <select name="deleteReason" id="deleteReasonId">
 <option value="Date Error">Date Error</option>

@@ -3,18 +3,18 @@
 <module configVersion="1.2">
 	
 	<!-- Drug Store Management and Dispensing Module Properties -->
-	<id>@MODULE_ID@</id>
-	<name>@MODULE_NAME@</name>
-	<version>@MODULE_VERSION@</version>
-	<package>@MODULE_PACKAGE@</package>
+	<id>${project.parent.artifactId}</id>
+	<name>${project.parent.name}</name>
+	<version>${project.parent.version}</version>
+	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
 	<author>Dusabe Eric</author>
 	<description>This is module to help in management of a pharmacy in health facilities</description>
 	
-	<activator>@MODULE_PACKAGE@.PharmacyManagementModuleActivator</activator>
+	<activator>${project.parent.groupId}.${project.parent.artifactId}.PharmacyManagementModuleActivator</activator>
 	
 	<!-- /Drug Store Management and Dispensing Module Properties -->
 	
-	<require_version>1.2.0.3400</require_version>	
+	<require_version>1.9.9</require_version>	
 	
 	<require_modules>
        <require_module version="0.0.7">org.openmrs.module.mohappointment</require_module>
@@ -23,7 +23,7 @@
 	<!-- AOP
 	<advice>
 	  	<point>org.openmrs.api.OrderService</point>
-	  	<class>@MODULE_PACKAGE@.advice.DrugOrderServiceAdvice</class>
+	  	<class>${project.parent.groupId}.${project.parent.artifactId}.advice.DrugOrderServiceAdvice</class>
 	 </advice>
 	-->	
 	
@@ -31,17 +31,17 @@
 	
 	<extension>
 		<point>org.openmrs.tracmodule.list</point>
-		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
 	</extension>
 	
 	<extension>
 		<point>org.openmrs.patientDashboardTab</point>
-		<class>@MODULE_PACKAGE@.extension.html.DrugOrderDashboardTab</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.DrugOrderDashboardTab</class>
 	</extension>
 	 <!-- 
 	<extension>
 		<point>org.openmrs.admin.list</point>
-		<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
 	</extension>
 	 -->
 	<!-- Required Privileges -->	
@@ -83,24 +83,24 @@
 	
 	<!-- Required Global Properties -->
 	<globalProperty>
-		<property>@MODULE_ID@.pharmacyEncounter</property>
+		<property>pharmacymanagement.pharmacyEncounter</property>
 		<defaultValue>14</defaultValue> 
 		<description>Pharmacy Encounter</description>
 	</globalProperty>
 	<globalProperty>
-		<property>@MODULE_ID@.periodDispense</property>
+		<property>pharmacymanagement.periodDispense</property>
 		<defaultValue>0</defaultValue> 
 		<description>The number of months to go back if there is no Dispense in the current month and there has been dispensing in the previous months</description>
 	</globalProperty>
 	<globalProperty>
-		<property>@MODULE_ID@.possibleFrequency</property>
+		<property>pharmacymanagement.possibleFrequency</property>
 		<defaultValue>4,5,30</defaultValue> 
 		<description>The first is for the drugs that a patient can take at once, the second is times per day and the last is days</description>
 	</globalProperty>
 	
 	
 	<!-- Internationalization -->
-	<!-- All message codes should start with @MODULE_ID@.* -->
+	<!-- All message codes should start with pharmacymanagement.* -->
 	<messages>
 		<lang>en</lang>
 		<file>messages.properties</file>
